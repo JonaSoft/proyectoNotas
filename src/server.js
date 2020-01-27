@@ -1,5 +1,6 @@
 /*jshint esversion: 8 */
-
+//OJO usar  "handlebars": "^4.5.3", en package.json para evitar
+//los errores en el reconocimiento de variables
 const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
@@ -16,8 +17,8 @@ app.set('views', path.join(__dirname, 'views'));
 //para vistas hbs
 app.engine('.hbs', exphbs({
     defaultLayout: 'main',
-    layoutsDir: path.join(app.get('views'), 'layouts'), //obtener direccion de /views
-    // y concatenar con carpeta /layouts
+    layoutsDir: path.join(app.get('views'), 'layouts'), //obtener direccion
+    //de /views y concatenar con carpeta /layouts
     partialsDir: path.join(app.get('views'), 'partials'),
     extname: '.hbs'
 }));
@@ -27,8 +28,8 @@ app.set('view engine', '.hbs');
 
 app.use(bodyParser.urlencoded({ extended: false })); // configurar en el servidor
 //para recibir solo datos, no imagenes
-app.use(methodOverride('_method')); // para recibir desde los formularios con distintos metodos: PUT, DELETE, etc
-//configuraciones para autenticar
+app.use(methodOverride('_method')); // para recibir desde los formularios
+//con distintos metodos: PUT, DELETE, etc //configuraciones para autenticar
 app.use(session({
     secret: 'mypasswordapp',
     resave: true,
@@ -40,7 +41,7 @@ app.use(session({
 
 //Routes
 app.use(require('./routes/index'));
-app.use(require('./routes/notes'));
+app.use(require('./routes/notas'));
 app.use(require('./routes/users'));
 
 
@@ -51,5 +52,5 @@ app.use(express.static(path.join(__dirname, 'public')));
 //Server listenning
 
 app.listen(app.get('port'), () => {
-    console.log('Servidor en puerto', app.get('port'))
+    console.log('Servidor en puerto', app.get('port'));
 });
