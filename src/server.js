@@ -7,12 +7,13 @@ const bodyParser = require('body-parser');
 const exphbs = require('express-handlebars');
 const methodOverride = require('method-override');
 const session = require('express-session');
+const flash = require('connect-flash');
 //Initialization
 const app = express();
 require('./database');
 
 //Settings
-app.set('port', process.env.PORT || 3000);
+app.set('port', process.env.PORT || 3001);
 app.set('views', path.join(__dirname, 'views'));
 //para vistas hbs
 app.engine('.hbs', exphbs({
@@ -36,8 +37,14 @@ app.use(session({
     saveUninitialized: true
 }));
 
-
+app.use(flash());
 //Global variables
+app.use((req, res, next) =>{
+    res.locals.success_msg = req.flash('success_msg');
+    res.locals.error_msg = req.flash('error_msg');
+    next();
+})
+
 
 //Routes
 app.use(require('./routes/index'));
