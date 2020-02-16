@@ -1,0 +1,50 @@
+<!--<div class="headerCalendar">Agenda Labores A.S.I. </div>-->
+ {{>messages}}
+    <div class="container m-auto my-auto">
+        <div class="row  mt-5 d-flex justify-content-center">
+           
+              <div class="col-md-10 d-flex justify-content-center">
+                  <div class="calendarDataContainer  d-flex justify-content-center">
+                      <div class="mainCalendarContainer d-flex justify-content-center">
+                        <div class="calendarContainer">
+                          <div class="calendario"> </div>
+                        </div>
+                      </div>
+                  </div>
+              </div>
+              <div class="col-md-2  d-flex justify-content-center">
+                   <div class="container-fluid ">
+                      <div class="row d-flex justify-content-center">
+                        <div class="container formTitle ">
+                            Schedule Event
+                        </div>
+                        <hr>
+                        <div class="form-inputs d-flex justify-content-center">
+                            <input type="text" id="titulo" placeholder="Nombre del evento"/>
+                            <input type="text" id="start_date" placeholder="Fecha de inicio"/>
+                            <div class="eventDuration">
+                                <input type="checkbox" id="allDay" class="radio-input"/>
+                                <label class="duration-label" for="allDay">Día completo</label>
+                            </div>
+                                <input type="text" id="end_date" placeholder="Fecha fin"/>
+                            <div class="form-group">
+                              <input type="text" id="start_hour" placeholder="Hora de inicio" class="timepicker hour-input left"/>
+                              <input type="text" id="end_hour" placeholder="Hora fin" class="timepicker hour-input right"/>
+                            </div>
+                            <button id="save" class="addButton">Añadir evento</button>
+                            
+                            <button id="deleteEvent" class="text-center delete">
+                                <img src="/img/delete.png" class="m-auto"/>
+                            </button>
+                            
+                            
+                        </div>
+                        
+                      </div>
+                        
+                   </div>
+              </div>
+              
+        </div>  
+        
+    </div>
