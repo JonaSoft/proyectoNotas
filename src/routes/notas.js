@@ -7,13 +7,13 @@ const Note = require('../models/Note');
 const { isAuthenticated } = require('../helpers/auth');
 
 
-router.get('/notas/add', isAuthenticated, (req, res) => {
+router.get('/add', isAuthenticated, (req, res) => {
     //res.send('Notes from databases');
     res.render('notas/new-note');
 });
 
 //para recibir datos del formulario en new-note.hbs
-router.post('/notas/new-note', isAuthenticated, async(req, res) => {
+router.post('/new-note', isAuthenticated, async(req, res) => {
     const { title, description } = req.body;
     const errors = [];
     if (!title) {
@@ -43,23 +43,24 @@ router.post('/notas/new-note', isAuthenticated, async(req, res) => {
     }
 });
 router.get('/notas', isAuthenticated, async(req, res) => {
+    console.log('por notas')
     //res.send('Notas from databases');
     let notas = await Note.find({ user: req.user.id }).sort({ date: 'desc' });
     //console.log(notas);
     //notas = JSON.parse(notas);
     res.render('notas/all-notes', { notas });
 });
-router.get('/notas/edit/:id', isAuthenticated, async(req, res) => {
+router.get('/:id', isAuthenticated, async(req, res) => {
     let notas = await Note.findById(req.params.id);
     res.render('notas/edit-note', { notas })
 });
-router.put('/notas/edit-nota/:id', isAuthenticated, async(req, res) => {
+router.put('/:id', isAuthenticated, async(req, res) => {
     const { title, description } = req.body;
     await Note.findByIdAndUpdate(req.params.id, { title, description });
     req.flash('success_msg', 'Nota editada correctamente');
     res.redirect('/notas');
 });
-router.delete('/notas/delete/:id', isAuthenticated, async(req, res) => {
+router.delete('/:id', isAuthenticated, async(req, res) => {
     console.log(req.params.id);
     await Note.findByIdAndDelete(req.params.id);
     req.flash('error_msg', 'Nota eliminada correctamente');
